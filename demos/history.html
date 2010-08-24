@@ -55,8 +55,8 @@ function reportEvent(event) {
 }
 
 function reportData(data) {
-  output.innerHTML = template.replace(/(:?\{(.*?)\})/g, function (a,b,c) {
-    return data[c];
+  output.innerHTML = template.replace(/(\{(.*?)\})/g, function (str,match1,match2) {
+    return data[match2];
   });
 }
 
@@ -80,7 +80,6 @@ addEvent(examples, 'click', function (event) {
 });
 
 addEvent(window, 'popstate', function (event) {
-  var data = event.state;
   reportEvent(event);
   reportData(event.state || { url: "unknown", name: "undefined", location: "undefined" });
 });
